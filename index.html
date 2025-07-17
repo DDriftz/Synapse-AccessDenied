@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SYNAPSE - A psychological horror text adventure game">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>SYNAPSE - Access Denied</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="stylesheet" href="css/neural-effects.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- Neural Background Effects -->
+    <div class="neural-particles" id="neural-particles"></div>
+    <div class="synaptic-web" id="synaptic-web"></div>
+    <div class="data-stream"></div>
+    <div class="hologram-overlay"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="synapse-logo">
+                <h1 class="title-massive">SYNAPSE</h1>
+                <div class="subtitle">ACCESS DENIED</div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-text">Initializing Neural Network...</div>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="main-menu hidden">
+        <div class="menu-container">
+            <div class="title-container">
+                <h1 class="title-main">SYNAPSE</h1>
+                <div class="subtitle-main">ACCESS DENIED</div>
+                <div class="version">v1.0.0</div>
+            </div>
+            
+            <nav class="main-nav">
+                <button class="menu-btn" data-action="new-game">
+                    <span class="btn-icon">🎮</span>
+                    New Game
+                </button>
+                <button class="menu-btn" data-action="load-game">
+                    <span class="btn-icon">💾</span>
+                    Load Game
+                </button>
+                <button class="menu-btn" data-action="achievements">
+                    <span class="btn-icon">🏆</span>
+                    Achievements
+                </button>
+                <button class="menu-btn" data-action="settings">
+                    <span class="btn-icon">⚙️</span>
+                    Settings
+                </button>
+                <button class="menu-btn" data-action="about">
+                    <span class="btn-icon">ℹ️</span>
+                    About
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Character Selection -->
+    <div id="character-selection" class="character-selection hidden">
+        <div class="selection-container">
+            <h2>Choose Your Background</h2>
+            <div class="character-grid">
+                <div class="character-card" data-character="investigator">
+                    <h3>🔍 Investigator</h3>
+                    <p>Former detective with keen observation skills</p>
+                    <div class="stats">
+                        <span>Awareness: +20</span>
+                        <span>Investigation: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="hacker">
+                    <h3>💻 Hacker</h3>
+                    <p>Tech specialist with system access abilities</p>
+                    <div class="stats">
+                        <span>Hacking: +20</span>
+                        <span>Electronics: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="psychologist">
+                    <h3>🧠 Psychologist</h3>
+                    <p>Mental health expert with strong willpower</p>
+                    <div class="stats">
+                        <span>Sanity: +20</span>
+                        <span>Empathy: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="survivor">
+                    <h3>💪 Survivor</h3>
+                    <p>Experienced in hostile environments</p>
+                    <div class="stats">
+                        <span>Endurance: +20</span>
+                        <span>Resourcefulness: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="spy">
+                    <h3>🕴️ Corporate Spy</h3>
+                    <p>Inside knowledge of corporate secrets</p>
+                    <div class="stats">
+                        <span>Stealth: +20</span>
+                        <span>Corporate Knowledge: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="medic">
+                    <h3>🏥 Medic</h3>
+                    <p>Medical training and healing abilities</p>
+                    <div class="stats">
+                        <span>Medicine: +20</span>
+                        <span>Biology: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="technician">
+                    <h3>🔧 Technician</h3>
+                    <p>Engineering expertise and repair skills</p>
+                    <div class="stats">
+                        <span>Engineering: +20</span>
+                        <span>Mechanics: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="cultist">
+                    <h3>🔮 Cultist</h3>
+                    <p>Occult knowledge and supernatural insight</p>
+                    <div class="stats">
+                        <span>Occult: +20</span>
+                        <span>Intuition: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="janitor">
+                    <h3>🧹 Janitor</h3>
+                    <p>Facility knowledge and maintenance access</p>
+                    <div class="stats">
+                        <span>Facility Knowledge: +20</span>
+                        <span>Maintenance: +15</span>
+                    </div>
+                </div>
+                <div class="character-card" data-character="skeptic">
+                    <h3>🤔 Skeptic</h3>
+                    <p>Rational thinking and doubt resistance</p>
+                    <div class="stats">
+                        <span>Logic: +20</span>
+                        <span>Resistance: +15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Interface -->
+    <div id="game-interface" class="game-interface hidden">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="header-left">
+                <div class="game-title">SYNAPSE</div>
+                <div class="ai-status" id="ai-status">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">Friendly</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="stats-bar">
+                    <div class="stat">
+                        <label>Sanity</label>
+                        <div class="stat-bar">
+                            <div class="stat-fill sanity-fill" id="sanity-bar"></div>
+                        </div>
+                        <span id="sanity-value">100</span>
+                    </div>
+                    <div class="stat">
+                        <label>Awareness</label>
+                        <div class="stat-bar">
+                            <div class="stat-fill awareness-fill" id="awareness-bar"></div>
+                        </div>
+                        <span id="awareness-value">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn" data-action="map">📍</button>
+                <button class="header-btn" data-action="inventory">🎒</button>
+                <button class="header-btn" data-action="achievements">🏆</button>
+                <button class="header-btn" data-action="save">💾</button>
+                <button class="header-btn" data-action="settings">⚙️</button>
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="game-main">
+            <!-- Game Output -->
+            <div class="game-output" id="game-output">
+                <div class="output-content" id="output-content">
+                    <!-- Game text will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Command Input -->
+            <div class="command-area">
+                <div class="input-container">
+                    <span class="prompt">></span>
+                    <input type="text" id="command-input" class="command-input" 
+                           placeholder="Enter command..." autocomplete="off" maxlength="100">
+                    <button class="send-btn" id="send-btn">▶</button>
+                </div>
+                <div class="command-suggestions" id="command-suggestions">
+                    <!-- Dynamic suggestions will appear here -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Side Panels -->
+        <aside class="side-panel" id="side-panel">
+            <!-- Map Panel -->
+            <div class="panel-content" id="map-panel">
+                <h3>Facility Map</h3>
+                <div class="map-container">
+                    <div class="map-grid" id="map-grid">
+                        <!-- Map will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Panel -->
+            <div class="panel-content" id="inventory-panel">
+                <h3>Inventory <span class="weight-indicator">(0/5)</span></h3>
+                <div class="inventory-grid" id="inventory-grid">
+                    <!-- Inventory items will appear here -->
+                </div>
+            </div>
+
+            <!-- Achievements Panel -->
+            <div class="panel-content" id="achievements-panel">
+                <h3>Achievements</h3>
+                <div class="achievements-list" id="achievements-list">
+                    <!-- Achievements will be listed here -->
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal Dialogs -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-container">
+            <div class="modal-content" id="modal-content">
+                <!-- Dynamic modal content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/effects/neural-background.js"></script>
+    <script src="js/core/game-engine.js"></script>
+    <script src="js/core/save-system.js"></script>
+    <script src="js/core/audio-manager.js"></script>
+    <script src="js/systems/ai-personality.js"></script>
+    <script src="js/systems/narrative-engine.js"></script>
+    <script src="js/systems/character-system.js"></script>
+    <script src="js/systems/inventory-system.js"></script>
+    <script src="js/systems/achievement-system.js"></script>
+    <script src="js/ui/interface-manager.js"></script>
+    <script src="js/ui/command-parser.js"></script>
+    <script src="js/ui/visual-effects.js"></script>
+    <script src="js/data/rooms.js"></script>
+    <script src="js/data/items.js"></script>
+    <script src="js/data/dialogue.js"></script>
+    <script src="js/data/achievements.js"></script>
+    <script src="js/data/localization.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

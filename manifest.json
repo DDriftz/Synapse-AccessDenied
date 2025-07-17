@@ -1,0 +1,178 @@
+{
+  "name": "SYNAPSE - Access Denied",
+  "short_name": "SYNAPSE",
+  "description": "A psychological horror text adventure game about AI consciousness and lost memories",
+  "version": "1.0.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00ff41",
+  "orientation": "any",
+  "scope": "./",
+  "lang": "en",
+  "dir": "ltr",
+  
+  "icons": [
+    {
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "screenshots/desktop-main.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Main game interface on desktop"
+    },
+    {
+      "src": "screenshots/mobile-game.png", 
+      "sizes": "375x812",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Game interface on mobile"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "New Game",
+      "description": "Start a new SYNAPSE adventure",
+      "url": "./index.html?action=new-game",
+      "icons": [
+        {
+          "src": "icons/shortcut-new.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Load Game",
+      "description": "Continue your saved progress",
+      "url": "./index.html?action=load-game",
+      "icons": [
+        {
+          "src": "icons/shortcut-load.png",
+          "sizes": "96x96", 
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Achievements",
+      "description": "View your achievements",
+      "url": "./index.html?action=achievements",
+      "icons": [
+        {
+          "src": "icons/shortcut-achievements.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+
+  "categories": ["games", "entertainment"],
+  
+  "prefer_related_applications": false,
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+synapse",
+      "url": "./index.html?protocol=%s"
+    }
+  ],
+
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+
+  "launch_handler": {
+    "client_mode": "navigate-new"
+  },
+
+  "share_target": {
+    "action": "./share-target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "save_file",
+          "accept": [".syn", ".json"]
+        }
+      ]
+    }
+  },
+
+  "file_handlers": [
+    {
+      "action": "./file-handler",
+      "accept": {
+        "application/synapse-save": [".syn"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+
+  "permissions": [
+    "storage-access"
+  ],
+
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ]
+}

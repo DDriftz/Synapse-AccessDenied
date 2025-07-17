@@ -1,0 +1,312 @@
+/* SYNAPSE - Neural Interface Enhanced Effects */
+/* Advanced background animations and particle systems */
+
+/* Floating Neural Particles */
+.neural-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.neural-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(0, 255, 136, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 8s linear infinite;
+}
+
+.neural-particle:nth-child(2n) {
+    background: rgba(0, 221, 255, 0.6);
+    animation-duration: 12s;
+    animation-delay: -2s;
+}
+
+.neural-particle:nth-child(3n) {
+    background: rgba(170, 0, 255, 0.6);
+    animation-duration: 10s;
+    animation-delay: -4s;
+}
+
+.neural-particle:nth-child(4n) {
+    background: rgba(255, 221, 0, 0.6);
+    animation-duration: 15s;
+    animation-delay: -6s;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Synaptic Connection Lines */
+.synaptic-web {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.synapse-connection {
+    position: absolute;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(0, 255, 136, 0.3) 20%, 
+        rgba(0, 255, 136, 0.1) 80%, 
+        transparent 100%);
+    height: 1px;
+    transform-origin: left center;
+    animation: synapseActivity 6s ease-in-out infinite;
+}
+
+@keyframes synapseActivity {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: scaleX(1);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scaleX(1.1);
+    }
+}
+
+/* Neural Node Pulses */
+.neural-node {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: nodePulse 4s ease-in-out infinite;
+}
+
+.neural-node:nth-child(2n) {
+    background: radial-gradient(circle, rgba(0, 221, 255, 0.8) 0%, transparent 70%);
+    animation-delay: -1s;
+}
+
+.neural-node:nth-child(3n) {
+    background: radial-gradient(circle, rgba(170, 0, 255, 0.8) 0%, transparent 70%);
+    animation-delay: -2s;
+}
+
+@keyframes nodePulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+    }
+    50% { 
+        transform: scale(1.5);
+        opacity: 1;
+        box-shadow: 0 0 20px 5px rgba(0, 255, 136, 0.2);
+    }
+}
+
+/* Data Stream Effect */
+.data-stream {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+        linear-gradient(0deg, transparent 95%, rgba(0, 255, 136, 0.05) 97%, rgba(0, 255, 136, 0.1) 99%, transparent 100%),
+        linear-gradient(90deg, transparent 95%, rgba(0, 221, 255, 0.05) 97%, rgba(0, 221, 255, 0.1) 99%, transparent 100%);
+    background-size: 100% 50px, 80px 100%;
+    animation: streamFlow 20s linear infinite;
+}
+
+@keyframes streamFlow {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: 0 50px, 80px 0;
+    }
+}
+
+/* Interface Hologram Effect */
+.hologram-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: 
+        radial-gradient(ellipse at top left, rgba(0, 255, 136, 0.02) 0%, transparent 50%),
+        radial-gradient(ellipse at top right, rgba(0, 221, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(170, 0, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(255, 221, 0, 0.02) 0%, transparent 50%);
+    animation: hologramShift 30s ease-in-out infinite;
+}
+
+@keyframes hologramShift {
+    0%, 100% { opacity: 0.8; }
+    25% { opacity: 0.6; }
+    50% { opacity: 1; }
+    75% { opacity: 0.7; }
+}
+
+/* Terminal Cursor Enhanced */
+.cursor-enhanced {
+    display: inline-block;
+    width: 2px;
+    background: var(--text-primary);
+    animation: cursorBlink 1.5s infinite, cursorGlow 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--text-primary);
+}
+
+@keyframes cursorBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes cursorGlow {
+    0%, 100% { 
+        box-shadow: 0 0 5px var(--text-primary);
+        transform: scaleY(1);
+    }
+    50% { 
+        box-shadow: 0 0 15px var(--text-primary), 0 0 25px rgba(0, 255, 136, 0.5);
+        transform: scaleY(1.1);
+    }
+}
+
+/* Text Glow Effects for Neural Interface */
+.neural-text {
+    text-shadow: 
+        0 0 5px rgba(0, 255, 136, 0.8),
+        0 0 10px rgba(0, 255, 136, 0.6),
+        0 0 15px rgba(0, 255, 136, 0.4);
+    animation: textPulse 4s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { 
+        text-shadow: 
+            0 0 5px rgba(0, 255, 136, 0.8),
+            0 0 10px rgba(0, 255, 136, 0.6);
+    }
+    50% { 
+        text-shadow: 
+            0 0 10px rgba(0, 255, 136, 1),
+            0 0 20px rgba(0, 255, 136, 0.8),
+            0 0 30px rgba(0, 255, 136, 0.6);
+    }
+}
+
+/* Enhanced Button Hover Effects */
+.neural-button {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(45deg, rgba(0, 0, 8, 0.9), rgba(10, 10, 21, 0.9));
+    border: 2px solid rgba(0, 255, 136, 0.5);
+    transition: all 0.3s ease;
+}
+
+.neural-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 255, 136, 0.2) 50%, 
+        transparent 100%);
+    transition: left 0.5s ease;
+}
+
+.neural-button:hover::before {
+    left: 100%;
+}
+
+.neural-button:hover {
+    border-color: rgba(0, 255, 136, 1);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 136, 0.5),
+        inset 0 0 20px rgba(0, 255, 136, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Status Indicator Enhancements */
+.status-indicator {
+    position: relative;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--text-primary) 30%, transparent 70%);
+    box-shadow: 
+        0 0 10px var(--text-primary),
+        inset 0 0 5px rgba(255, 255, 255, 0.3);
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 5px var(--text-primary);
+    }
+    50% { 
+        transform: scale(1.2);
+        box-shadow: 0 0 15px var(--text-primary), 0 0 25px rgba(0, 255, 136, 0.3);
+    }
+}
+
+/* Responsive Neural Effects */
+@media (max-width: 768px) {
+    .neural-particles .neural-particle {
+        animation-duration: 6s;
+    }
+    
+    .data-stream {
+        animation-duration: 15s;
+    }
+    
+    .hologram-overlay {
+        animation-duration: 20s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .neural-particle,
+    .synapse-connection,
+    .neural-node,
+    .data-stream,
+    .hologram-overlay {
+        animation: none;
+    }
+    
+    .cursor-enhanced {
+        animation: cursorBlink 1.5s infinite;
+    }
+}
