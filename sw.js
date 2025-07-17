@@ -14,9 +14,12 @@ const STATIC_FILES = [
     // Stylesheets
     './css/main.css',
     './css/effects.css',
+    './css/neural-effects.css',
     './css/mobile.css',
     
     // Core JavaScript
+    './js/core/runtime-safety.js',
+    './js/core/error-diagnostics.js',
     './js/core/game-engine.js',
     './js/core/save-system.js',
     './js/core/audio-manager.js',

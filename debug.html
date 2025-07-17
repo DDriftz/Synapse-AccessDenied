@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNAPSE - Debug Test</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #00ff41;
+            font-family: monospace;
+            padding: 20px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #00ff41;
+        }
+        .success { border-color: #00ff41; }
+        .error { border-color: #ff4444; color: #ff4444; }
+    </style>
+</head>
+<body>
+    <h1>SYNAPSE - Dependency Test</h1>
+    <div id="test-results"></div>
+
+    <script>
+        const results = document.getElementById('test-results');
+        
+        function addResult(test, success, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${success ? 'success' : 'error'}`;
+            div.innerHTML = `<strong>${test}:</strong> ${success ? '✅' : '❌'} ${message}`;
+            results.appendChild(div);
+        }
+
+        // Test 1: Basic DOM elements
+        try {
+            const requiredElements = [
+                'loading-screen', 'main-menu', 'character-selection', 
+                'game-interface', 'modal-overlay'
+            ];
+            
+            let missingElements = [];
+            requiredElements.forEach(id => {
+                if (!document.getElementById(id)) {
+                    missingElements.push(id);
+                }
+            });
+            
+            if (missingElements.length === 0) {
+                addResult('DOM Elements', true, 'All required elements found');
+            } else {
+                addResult('DOM Elements', false, `Missing: ${missingElements.join(', ')}`);
+            }
+        } catch (error) {
+            addResult('DOM Elements', false, error.message);
+        }
+
+        // Test 2: CSS Files
+        try {
+            const stylesheets = Array.from(document.styleSheets);
+            const cssFiles = stylesheets.filter(sheet => 
+                sheet.href && (
+                    sheet.href.includes('main.css') || 
+                    sheet.href.includes('effects.css') ||
+                    sheet.href.includes('neural-effects.css') ||
+                    sheet.href.includes('mobile.css')
+                )
+            );
+            
+            if (cssFiles.length >= 3) {
+                addResult('CSS Files', true, `${cssFiles.length} CSS files loaded`);
+            } else {
+                addResult('CSS Files', false, `Only ${cssFiles.length} CSS files loaded`);
+            }
+        } catch (error) {
+            addResult('CSS Files', false, error.message);
+        }
+
+        // Test 3: Browser Compatibility
+        try {
+            const features = [
+                'localStorage', 'JSON', 'Promise', 'fetch', 
+                'requestAnimationFrame', 'crypto'
+            ];
+            
+            let missingFeatures = [];
+            features.forEach(feature => {
+                if (!(feature in window)) {
+                    missingFeatures.push(feature);
+                }
+            });
+            
+            if (missingFeatures.length === 0) {
+                addResult('Browser Compatibility', true, 'All required features available');
+            } else {
+                addResult('Browser Compatibility', false, `Missing: ${missingFeatures.join(', ')}`);
+            }
+        } catch (error) {
+            addResult('Browser Compatibility', false, error.message);
+        }
+
+        // Test 4: Service Worker
+        try {
+            if ('serviceWorker' in navigator) {
+                addResult('Service Worker', true, 'Service Worker API available');
+            } else {
+                addResult('Service Worker', false, 'Service Worker not supported');
+            }
+        } catch (error) {
+            addResult('Service Worker', false, error.message);
+        }
+
+        // Test 5: PWA Manifest
+        try {
+            fetch('./manifest.json')
+                .then(response => {
+                    if (response.ok) {
+                        addResult('PWA Manifest', true, 'Manifest file accessible');
+                    } else {
+                        addResult('PWA Manifest', false, `HTTP ${response.status}`);
+                    }
+                })
+                .catch(error => {
+                    addResult('PWA Manifest', false, error.message);
+                });
+        } catch (error) {
+            addResult('PWA Manifest', false, error.message);
+        }
+    </script>
+</body>
+</html>
